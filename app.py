@@ -1,3 +1,5 @@
+import cv2
+print(cv2.__version__)
 import streamlit as st
 from paddleocr import PaddleOCR
 
