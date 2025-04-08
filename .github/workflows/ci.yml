@@ -1,0 +1,40 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+    # Шаг для клонирования репозитория
+    - name: Check out code
+      uses: actions/checkout@v2
+
+    # Шаг для настройки Python
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.12'
+
+    # Шаг для установки системных зависимостей
+    - name: Install system dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y libgl1-mesa-glx
+
+    # Шаг для установки зависимостей Python из requirements.txt
+    - name: Install dependencies
+      run: |
+        pip install -r requirements.txt
+
+    # Шаг для запуска тестов или приложения
+    - name: Run the application or tests
+      run: |
+        python app.py  # или ваш основной скрипт
