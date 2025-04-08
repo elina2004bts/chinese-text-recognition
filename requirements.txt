@@ -4,3 +4,4 @@ torchvision
 fugashi[unidic-lite]
 pillow
 paddleocr
+opencv-python
