@@ -2,3 +2,5 @@ streamlit
 transformers
 torchvision
 fugashi[unidic-lite]
+pillow
+paddleocr
