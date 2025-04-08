@@ -1,24 +1,25 @@
 import streamlit as st
 from paddleocr import PaddleOCR
-from PIL import Image
 
-# Инициализация OCR
+# Инициализация PaddleOCR с параметрами для китайского языка
 ocr = PaddleOCR(use_angle_cls=True, lang='ch')
 
-# Заголовок приложения
-st.title('Распознавание китайского текста с PaddleOCR')
+st.title("Китайский текст - Распознавание с помощью PaddleOCR")
 
 # Загрузка изображения
-uploaded_file = st.file_uploader("Загрузите изображение", type=["jpg", "png"])
+img_file = st.file_uploader("Загрузите изображение с китайским текстом", type=["png", "jpg", "jpeg", "webp"])
 
-if uploaded_file is not None:
-    image = Image.open(uploaded_file)
-    st.image(image, caption="Загруженное изображение", use_column_width=True)
+if img_file is not None:
+    # Считывание изображения
+    img_path = f"./{img_file.name}"
+    with open(img_path, "wb") as f:
+        f.write(img_file.getbuffer())
 
-    # Преобразование изображения в формат, подходящий для OCR
-    result = ocr.ocr(uploaded_file, cls=True)
+    # Распознавание текста
+    result = ocr.ocr(img_path, cls=True)
 
-    # Печать результатов
-    st.subheader("Распознанный текст:")
+    # Показ результатов
+    st.image(img_path, caption="Загруженное изображение", use_column_width=True)
+    st.write("Распознанный текст:")
     for line in result[0]:
         st.write(line[1])
