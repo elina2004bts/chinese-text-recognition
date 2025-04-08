@@ -21,4 +21,14 @@ Web-приложение для распознавания текста на к�
 - Точность: ~85% на стандартных текстах.  
 - Требования:  
   - Python 3.6+  
-  - Библиотеки: paddleocr, opencv-python  
+  - Библиотеки: paddleocr, opencv-python
+  - 
+## Пример использования:
+
+```python
+from paddleocr import PaddleOCR
+ocr = PaddleOCR(use_angle_cls=True, lang='ch')
+img_path = 'path_to_image'
+result = ocr.ocr(img_path, cls=True)
+for line in result[0]:
+    print(line[1])
