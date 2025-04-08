@@ -1,0 +1,28 @@
+name: Build and deploy Streamlit app
+
+on:
+  push:
+    branches:
+      - main  # Будет запускаться при каждом пуше в ветку main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest  # Указание операционной системы для CI/CD
+
+    steps:
+    - name: Check out code
+      uses: actions/checkout@v2  # Проверка исходного кода из репозитория
+
+    - name: Set up Python
+      uses: actions/setup-python@v2  # Устанавливаем Python
+      with:
+        python-version: '3.8'  # Указываем версию Python, которая будет использоваться
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip  # Обновляем pip
+        pip install -r requirements.txt  # Устанавливаем зависимости из requirements.txt
+
+    - name: Run Streamlit app
+      run: |
+        streamlit run app.py  # Запускаем приложение Streamlit
