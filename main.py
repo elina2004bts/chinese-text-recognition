@@ -6,7 +6,7 @@ import os
 ocr = PaddleOCR(use_angle_cls=True, lang='ch')  # lang='ch' для китайского языка
 
 # Укажите путь к вашему изображению
-img_path = 'path_to_image'  # Замените на путь к вашему изображению
+img_path = "C:\Users\USer\Desktop\китайский.webp"  # Замените на путь к вашему изображению
 
 # Распознавание текста на изображении
 result = ocr.ocr(img_path, cls=True)
