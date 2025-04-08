@@ -3,3 +3,4 @@ paddleocr==2.10.0  # или подходящая версия
 paddlepaddle==2.6.2  # или подходящая версия
 setuptools
 streamlit
+Pillow
