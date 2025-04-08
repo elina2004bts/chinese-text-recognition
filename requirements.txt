@@ -1,4 +1,4 @@
-paddleocr
-paddlepaddle==2.10.0
-streamlit
+paddleocr==2.10.0
+paddlepaddle==2.6.2  # Совместимая версия
 opencv-python
+streamlit
