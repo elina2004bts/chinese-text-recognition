@@ -1,16 +1,19 @@
-from paddleocr import PaddleOCR
 from PIL import Image
-import os
+import numpy as np
+from paddleocr import PaddleOCR
 
-# Инициализация PaddleOCR с параметрами для китайского языка
-ocr = PaddleOCR(use_angle_cls=True, lang='ch')  # lang='ch' для китайского языка
+# Инициализация PaddleOCR
+ocr = PaddleOCR(use_angle_cls=True, lang='ch')
 
-# Укажите путь к вашему изображению
-img_path = "C:\\Users\\USer\\Desktop\\китайский.jpg"  # Замените на путь к вашему изображению
+# Загрузите изображение с помощью Pillow
+img = Image.open('path_to_image')
 
-# Распознавание текста на изображении
-result = ocr.ocr(img_path, cls=True)
+# Конвертируйте изображение в массив NumPy (для совместимости с PaddleOCR)
+img_np = np.array(img)
 
-# Печать результатов
+# Распознавание текста
+result = ocr.ocr(img_np, cls=True)
+
+# Вывод результата
 for line in result[0]:
     print(line[1])
