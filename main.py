@@ -1,26 +1,16 @@
-import io
-import streamlit as st
-
-from transformers import pipeline
+from paddleocr import PaddleOCR
 from PIL import Image
+import os
 
+# Инициализация PaddleOCR с параметрами для китайского языка
+ocr = PaddleOCR(use_angle_cls=True, lang='ch')  # lang='ch' для китайского языка
 
-def load_image():
-    uploaded_file = st.file_uploader(label='Выберите изображение для распознавания')
-    if uploaded_file is not None:
-        image_data = uploaded_file.getvalue()
-        st.image(image_data)
-        return Image.open(io.BytesIO(image_data))
-    else:
-        return None
+# Укажите путь к вашему изображению
+img_path = 'path_to_image'  # Замените на путь к вашему изображению
 
+# Распознавание текста на изображении
+result = ocr.ocr(img_path, cls=True)
 
-st.title('Распознай китайский текст с изображения!')
-img = load_image()
-
-result = st.button('Распознать изображение')
-if result:
-    captioner = pipeline("image-to-text","kha-white/manga-ocr-base")
-    text = captioner(img)
-    st.write('**Результаты распознавания:**')
-    st.write(text[0]["generated_text"])
+# Печать результатов
+for line in result[0]:
+    print(line[1])
